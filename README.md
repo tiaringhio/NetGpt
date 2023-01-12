@@ -12,6 +12,7 @@
 # How To
 
 Using a docker compose file:
+> ⚠️ Remember to change the OpenAI API Key! ⚠️
 
 ``` YAML
 version: "3.8"
@@ -26,8 +27,7 @@ services:
     environment:
       - AppSettings__OpenApiUrl=https://api.openai.com/v1/completions
       - AppSettings__OpenApiKey=<YOUR-API-KEY-HERE>
-    volumes:
-      - ~/.aspnet/https:/https
+      # Change value of API Key
 ```
 
 Then simply go to http://localhost:7001/swagger/index.html and under the **Completions** controller click the **Try it out** button, write your prompt in the appropriate field and click the **Execute** button (blue button).
