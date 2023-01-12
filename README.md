@@ -35,12 +35,12 @@ Then simply go to http://localhost:7001/swagger/index.html and under the **Compl
 ## Request Example
 
 <p align="center">
-<img src="NetGpt.api/Resources/request_example.jpg" alt="Request Example">
+<img src="NetGpt.Api/Resources/request_example.jpg" alt="Request Example">
 
 ## Response Example
 
 <p align="center">
-<img src="NetGpt.api/Resources/response_example.jpg" alt="Request Example">
+<img src="NetGpt.Api/Resources/response_example.jpg" alt="Request Example">
 
 ## Contributing
 

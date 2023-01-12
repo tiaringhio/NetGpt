@@ -14,6 +14,8 @@ RUN dotnet build "NetGpt.Api.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "NetGpt.Api.csproj" -c Release -o /app/publish
 
+LABEL org.opencontainers.image.source="https://github.com/tiaringhio/NetGpt"
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
