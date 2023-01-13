@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
   <br />
     <p align="center">
-    <img src="NetGpt.Api/Resources/chip.png" alt="Logo" width="130" height="130">
+    <img src="Resources/chip.png" alt="Logo" width="130" height="130">
   </a>
   <h1 align="center">NetGpt</h1>
   <p align="center">
@@ -35,12 +35,12 @@ Then simply go to http://localhost:7001/swagger/index.html and under the **Compl
 ## Request Example
 
 <p align="center">
-<img src="NetGpt.Api/Resources/request_example.jpg" alt="Request Example">
+<img src="Resources/request_example.jpg" alt="Request Example">
 
 ## Response Example
 
 <p align="center">
-<img src="NetGpt.Api/Resources/response_example.jpg" alt="Request Example">
+<img src="Resources/response_example.jpg" alt="Request Example">
 
 ## Contributing
 
