@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using NetGpt.Api.Models;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ public sealed class CompletionService : ICompletionService
         _httpClientFactory = httpClientFactory;
     }
     
-    public async Task<string> GetCompletion(string query)
+    public async Task<CompletionResponse?> GetCompletion(string query)
     {
         var client = _httpClientFactory.CreateClient("openApi");
 
@@ -21,6 +22,8 @@ public sealed class CompletionService : ICompletionService
         {
             Prompt = query
         };
+
+        CompletionResponse? completionResponse = new();
         
         try
         {
@@ -29,21 +32,18 @@ public sealed class CompletionService : ICompletionService
 
             var response = await client.PostAsync("", mycontent);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                return Errors.Codes[response.StatusCode.ToString()];
-            }
-
             var responseString = await response.Content.ReadAsStringAsync();
             
-            var completionResponse = JsonConvert.DeserializeObject<CompletionResponse>(responseString);
+            completionResponse = JsonConvert.DeserializeObject<CompletionResponse>(responseString);
 
-            return completionResponse!.Choices[0].Text;
+            completionResponse!.StatusCode = response.StatusCode;
+            return completionResponse;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"[Error] {nameof(GetCompletion)} - {ex.Message}");
-            return Errors.Codes["500"];
+            completionResponse!.StatusCode = HttpStatusCode.InternalServerError;
+            return completionResponse;
         }
     }
 }

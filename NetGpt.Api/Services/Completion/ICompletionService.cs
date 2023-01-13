@@ -1,6 +1,8 @@
+using NetGpt.Api.Models;
+
 namespace NetGpt.Api.Services.Completion;
 
 public interface ICompletionService
 {
-    Task<string> GetCompletion(string query);
+    Task<CompletionResponse?> GetCompletion(string query);
 }

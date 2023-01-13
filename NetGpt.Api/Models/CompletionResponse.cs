@@ -1,3 +1,4 @@
+using System.Net;
 using Newtonsoft.Json;
 
 namespace NetGpt.Api.Models;
@@ -5,22 +6,24 @@ namespace NetGpt.Api.Models;
 public sealed class CompletionResponse
 {
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     [JsonProperty("object")]
-    public string Object { get; set; }
-
+    public string? Object { get; set; }
+    
     [JsonProperty("created")]
-    public int Created { get; set; }
+    public int? Created { get; set; }
 
     [JsonProperty("model")]
-    public string Model { get; set; }
+    public string? Model { get; set; }
 
     [JsonProperty("choices")]
-    public List<Choice> Choices { get; set; }
+    public List<Choice>? Choices { get; set; }
 
     [JsonProperty("usage")]
-    public Usage Usage { get; set; }
+    public Usage? Usage { get; set; }
+
+    [JsonIgnore] public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
 }
 
 public sealed class Choice
@@ -37,8 +40,6 @@ public sealed class Choice
     [JsonProperty("finish_reason")]
     public string FinishReason { get; set; }
 }
-
-
 
 public sealed class Usage
 {

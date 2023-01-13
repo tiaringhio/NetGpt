@@ -24,14 +24,14 @@ public sealed class CompletionsController : ControllerBase
     /// <response code="429">User is rate limited</response>
     /// <response code="500">Server Error</response>
     [Produces("application/json")]
-    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status429TooManyRequests)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(typeof(CompletionResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CompletionResponse), StatusCodes.Status429TooManyRequests)]
+    [ProducesResponseType(typeof(CompletionResponse), StatusCodes.Status500InternalServerError)]
     [HttpPost]
     public async Task<IActionResult> GetCompletion([FromBody] CompletionRequest request)
     {
         var completion = await _completionService.GetCompletion(request.Prompt);
         
-        return Ok(completion);
+        return StatusCode(Convert.ToInt32(completion!.StatusCode), completion);
     }
 }
