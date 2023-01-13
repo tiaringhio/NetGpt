@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using NetGpt.Api.Models;
 using NetGpt.Api.Services.Completion;
@@ -49,11 +50,11 @@ builder.Services.AddHttpClient("openApi", o =>
 });
 
 
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
+builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
 });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

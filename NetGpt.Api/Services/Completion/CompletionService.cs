@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using NetGpt.Api.Models;
-using Newtonsoft.Json;
 
 namespace NetGpt.Api.Services.Completion;
 
@@ -27,14 +27,14 @@ public sealed class CompletionService : ICompletionService
         
         try
         {
-            var serializedRequest = JsonConvert.SerializeObject(request);
+            var serializedRequest = JsonSerializer.Serialize(request);
             var mycontent = new StringContent(serializedRequest, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync("", mycontent);
 
             var responseString = await response.Content.ReadAsStringAsync();
             
-            completionResponse = JsonConvert.DeserializeObject<CompletionResponse>(responseString);
+            completionResponse = JsonSerializer.Deserialize<CompletionResponse>(responseString);
 
             completionResponse!.StatusCode = response.StatusCode;
             return completionResponse;

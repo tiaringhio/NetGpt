@@ -1,26 +1,26 @@
 using System.Net;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace NetGpt.Api.Models;
 
 public sealed class CompletionResponse
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public string? Id { get; set; }
 
-    [JsonProperty("object")]
+    [JsonPropertyName("object")]
     public string? Object { get; set; }
     
-    [JsonProperty("created")]
+    [JsonPropertyName("created")]
     public int? Created { get; set; }
 
-    [JsonProperty("model")]
+    [JsonPropertyName("model")]
     public string? Model { get; set; }
 
-    [JsonProperty("choices")]
+    [JsonPropertyName("choices")]
     public List<Choice>? Choices { get; set; }
 
-    [JsonProperty("usage")]
+    [JsonPropertyName("usage")]
     public Usage? Usage { get; set; }
 
     [JsonIgnore] public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
@@ -28,27 +28,27 @@ public sealed class CompletionResponse
 
 public sealed class Choice
 {
-    [JsonProperty("text")]
+    [JsonPropertyName("text")]
     public string Text { get; set; }
 
-    [JsonProperty("index")]
+    [JsonPropertyName("index")]
     public int Index { get; set; }
 
-    [JsonProperty("logprobs")]
+    [JsonPropertyName("logprobs")]
     public object Logprobs { get; set; }
 
-    [JsonProperty("finish_reason")]
+    [JsonPropertyName("finish_reason")]
     public string FinishReason { get; set; }
 }
 
 public sealed class Usage
 {
-    [JsonProperty("prompt_tokens")]
+    [JsonPropertyName("prompt_tokens")]
     public int PromptTokens { get; set; }
 
-    [JsonProperty("completion_tokens")]
+    [JsonPropertyName("completion_tokens")]
     public int CompletionTokens { get; set; }
 
-    [JsonProperty("total_tokens")]
+    [JsonPropertyName("total_tokens")]
     public int TotalTokens { get; set; }
 }

@@ -17,6 +17,7 @@ jobs:
           echo $CR_PAT | docker login ghcr.io -u ${{ secrets.User }} --password-stdin
         env:
           CR_PAT: ${{ secrets.PAT }}
+
       - name: Build Docker Image
         run: |
           docker build . --file NetGpt.Api/Dockerfile --tag ghcr.io/tiaringhio/netgpt:latest

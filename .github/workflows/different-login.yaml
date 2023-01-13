@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  Build&Push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ inputs.registry_host }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.passw }}
+          
+      - name: Build Docker Image
+        run: |
+          docker build . --file NetGpt.Api/Dockerfile --tag ghcr.io/${{ github.repository_owner }}/netgpt:latest
+          docker push ghcr.io/${{ github.repository_owner }}/netgpt:latest
